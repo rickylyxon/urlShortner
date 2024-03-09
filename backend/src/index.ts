@@ -15,7 +15,6 @@ app.post("/shorten", urlValidate, async (req, res) => {
   try {
     const url = req.url;
     const shortUrl = uid.rnd();
-    console.log("before");
     const createdUrl = await prisma.url.create({
       data: {
         url,
@@ -26,7 +25,6 @@ app.post("/shorten", urlValidate, async (req, res) => {
       },
     });
     const shortenURL = createdUrl.shortUrl;
-    console.log("after");
     res.status(200).json({ shortUrl: shortenURL, status: 200 });
   } catch (error) {
     console.error("Error creating shortened URL:", error);
